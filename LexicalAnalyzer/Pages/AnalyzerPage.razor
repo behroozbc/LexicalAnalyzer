@@ -6,22 +6,22 @@
 <h1>Counter</h1>
 
 <div class="row">
-    <div class="col"> 
+    <div class="col mt-2"> 
         <span> Please Input File :</span>
 <InputFile OnChange="@LoadFile" />
     </div>
-    <div class="col">
+    <div class="col mt-2">
         <button class="btn btn-primary" @onclick="UseSample">Start With Sample Data </button>
     </div>
 </div>
-<div class="row">
-    <div class="col">
+<div class="row mt-3">
+    <div class="col mt-2">
         <h3>Input File </h3>
         <pre>
     @inputFileText
         </pre>
     </div>
-    <div class="col">
+    <div class="col m-2">
         <h3>Result</h3>
 <pre>
     @resultText
