@@ -5,9 +5,14 @@
 
 <h1>Counter</h1>
 
-<div>
-    <span> Please Input File :</span>
+<div class="row">
+    <div class="col"> 
+        <span> Please Input File :</span>
 <InputFile OnChange="@LoadFile" />
+    </div>
+    <div class="col">
+        <button class="btn btn-primary" @onclick="UseSample">Start With Sample Data </button>
+    </div>
 </div>
 <div class="row">
     <div class="col">
@@ -25,14 +30,20 @@
 </div>
 
 @code {
-    private int currentCount = 0;
     private string inputFileText = "";
     private string resultText = "";
-    private async void IncrementCount()
+    private Analyze _analyzeEngine;
+    private async void UseSample()
     {
-        currentCount++;
-        inputFileText = await Http.GetStringAsync("/assets/matrix.txt");
+        inputFileText = await Http.GetStringAsync("assets/sample.txt");
+        resultText = _analyzeEngine.Result(inputFileText);
         StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _analyzeEngine = new Analyze(await Http.GetStringAsync("assets/matrix.txt"), Analyze.GenrateKeywordsList(await Http.GetStringAsync("assets/keyWords.txt")));
+         
     }
     private async void LoadFile(InputFileChangeEventArgs e)
     {
@@ -40,7 +51,7 @@
                          new StreamContent(e.File.OpenReadStream(e.File.Size));
         inputFileText = await fileContent.ReadAsStringAsync();
         StateHasChanged();
-        resultText = (new Analyze(await Http.GetStringAsync("assets/matrix.txt"),Analyze.GenrateKeywordsList(await Http.GetStringAsync("assets/keyWords.txt")))).Result(inputFileText);
+        resultText = _analyzeEngine.Result(inputFileText);
         StateHasChanged();
     }
 }
