@@ -40,7 +40,7 @@
                          new StreamContent(e.File.OpenReadStream(e.File.Size));
         inputFileText = await fileContent.ReadAsStringAsync();
         StateHasChanged();
-        resultText = (new Analyze(await Http.GetStringAsync("/assets/matrix.txt"),Analyze.GenrateKeywordsList(await Http.GetStringAsync("/assets/keyWords.txt")))).Result(inputFileText);
+        resultText = (new Analyze(await Http.GetStringAsync("assets/matrix.txt"),Analyze.GenrateKeywordsList(await Http.GetStringAsync("assets/keyWords.txt")))).Result(inputFileText);
         StateHasChanged();
     }
 }

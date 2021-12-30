@@ -32,7 +32,7 @@ else
     private IEnumerable<KeyWordInfo>? keyWords;
         protected override async Task OnInitializedAsync()
     {
-        keyWords = (await Http.GetStringAsync("/assets/keyWords.txt")).Split(',').Select((word,i)=>new KeyWordInfo(i+1,word));
+        keyWords = (await Http.GetStringAsync("assets/keyWords.txt")).Split(',').Select((word,i)=>new KeyWordInfo(i+1,word));
     }
 
         public record KeyWordInfo(int Number,string Name);
