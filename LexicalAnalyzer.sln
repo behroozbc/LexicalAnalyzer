@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LexicalAnalyzer", "BlazorApp1\LexicalAnalyzer.csproj", "{B1F24874-3DBB-4EE9-8C56-7AF7AF24D98B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LexicalAnalyzer", "LexicalAnalyzer\LexicalAnalyzer.csproj", "{B1F24874-3DBB-4EE9-8C56-7AF7AF24D98B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analyzer.Computer", "Analyzer.Computer\Analyzer.Computer.csproj", "{7BCA1A23-2151-4379-8CD3-D2A03EF47E23}"
 EndProject
