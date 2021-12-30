@@ -1,0 +1,46 @@
+﻿@page "/analyzer"
+@inject HttpClient Http
+
+<PageTitle>Analyzer</PageTitle>
+
+<h1>Counter</h1>
+
+<div>
+    <span> Please Input File :</span>
+<InputFile OnChange="@LoadFile" />
+</div>
+<div class="row">
+    <div class="col">
+        <h3>Input File </h3>
+        <pre>
+    @inputFileText
+        </pre>
+    </div>
+    <div class="col">
+        <h3>Result</h3>
+<pre>
+    @resultText
+</pre>
+    </div>
+</div>
+
+@code {
+    private int currentCount = 0;
+    private string inputFileText = "";
+    private string resultText = "";
+    private async void IncrementCount()
+    {
+        currentCount++;
+        inputFileText = await Http.GetStringAsync("/assets/matrix.txt");
+        StateHasChanged();
+    }
+    private async void LoadFile(InputFileChangeEventArgs e)
+    {
+        var fileContent =
+                         new StreamContent(e.File.OpenReadStream(e.File.Size));
+        inputFileText = await fileContent.ReadAsStringAsync();
+        StateHasChanged();
+        resultText = (new Analyze(await Http.GetStringAsync("/assets/matrix.txt"),Analyze.GenrateKeywordsList(await Http.GetStringAsync("/assets/keyWords.txt")))).Result(inputFileText);
+        StateHasChanged();
+    }
+}

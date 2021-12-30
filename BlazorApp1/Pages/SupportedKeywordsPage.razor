@@ -1,0 +1,39 @@
+﻿@page "/keywords"
+@inject HttpClient Http
+<PageTitle>Supported keywords</PageTitle>
+
+<h3>Supported keywords</h3>
+
+@if (keyWords == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Word</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var word in keyWords)
+            {
+                <tr>
+                    <td>@word.Number</td>
+                    <td>@word.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    private IEnumerable<KeyWordInfo>? keyWords;
+        protected override async Task OnInitializedAsync()
+    {
+        keyWords = (await Http.GetStringAsync("/assets/keyWords.txt")).Split(',').Select((word,i)=>new KeyWordInfo(i+1,word));
+    }
+
+        public record KeyWordInfo(int Number,string Name);
+}
