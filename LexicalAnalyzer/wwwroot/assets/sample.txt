@@ -1,8 +1,6 @@
 // Sample with comments
 
 #include CLibrary;
-using C#Library;
-import JavaLibrary;
 
 void main()
 {
