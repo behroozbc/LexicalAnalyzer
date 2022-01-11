@@ -66,7 +66,7 @@ public class Analyze
         return rules[iState][0];
     }
 
-    private bool isKeyword(string sToken)
+    private bool IsKeyword(string sToken)
     {
         if ((sToken).Length > 16 || (sToken).Length == 0)
             return false;
@@ -149,7 +149,7 @@ public class Analyze
                     sToken += cChar;
                     break;
                 case 2:
-                    if (isKeyword(sToken))
+                    if (IsKeyword(sToken))
                         result += sToken;
                     else
                         result += "<ID>";
